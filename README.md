@@ -19,12 +19,18 @@ cd notifier-api
 npm install
 ```
 
-### 3. Run Migrations
+### 3. Run Seeds
 
-Run TypeORM migrations to create database tables:
+Run TypeORM seeds to populate database tables:
 
 ```bash
-npm run typeorm migration:run
+npm run db:seed
+```
+
+Clear tables:
+
+```bash
+npm run db:clear
 ```
 
 ### 4. Start the Server
