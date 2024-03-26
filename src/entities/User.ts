@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from "typeorm";
 import { Category } from "./Category";
 import { Channel } from "./Channel";
 
@@ -15,7 +21,7 @@ export class User {
 
   @Column()
   phoneNumber: string;
-  
+
   @Column()
   deviceToken: string;
 

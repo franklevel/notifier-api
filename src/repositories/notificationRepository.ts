@@ -15,7 +15,7 @@ export class NotificationRepository {
 
   async getAll(): Promise<Notification[]> {
     return this.notificationRepository.find({
-      relations: ['category', 'channel'],
+      relations: ['user','category', 'channel'],
       order: {
         createdAt: "DESC",
       },

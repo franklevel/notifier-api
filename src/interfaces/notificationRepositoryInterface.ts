@@ -1,6 +1,6 @@
-import { Notification } from '../entities/Notification';
+import { Notification } from "../entities/Notification";
 
 export interface NotificationRepositoryInterface {
-    createNotification(notification: Notification): Promise<Notification>;
-    getAll(): Promise<Notification[]>;
+  createNotification(notification: Notification): Promise<Notification>;
+  getAll(): Promise<Notification[]>;
 }

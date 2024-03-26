@@ -10,14 +10,19 @@ export class UserRepository {
   }
 
   async findSubscribedUsers(categoryId: string): Promise<User[]> {
-    return this.userRepository.createQueryBuilder('user')
-        .leftJoinAndSelect('user.subscribedCategories', 'category')
-        .leftJoinAndSelect('user.notificationChannels', 'channel')
-        .where('category.id = :categoryId', { categoryId })
-        .getMany();
-}
+    return this.userRepository
+      .createQueryBuilder("user")
+      .leftJoinAndSelect("user.subscribedCategories", "category")
+      .leftJoinAndSelect("user.notificationChannels", "channel")
+      .where("category.id = :categoryId", { categoryId })
+      .getMany();
+  }
 
   async saveMany(users: User[]): Promise<User[]> {
     return this.userRepository.save(users);
+  }
+
+  async findOne(id: string): Promise<User> {
+    return this.userRepository.findOneBy({ id });
   }
 }

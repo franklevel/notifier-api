@@ -43,6 +43,6 @@ export const getAll = async (
     res.status(200).json({ notifications });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Failed to send notification", error });
+    res.status(500).json({ message: "Failed to get notifications", error });
   }
 };
