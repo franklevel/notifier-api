@@ -67,4 +67,8 @@ export class NotificationService implements NotificationServiceInterface {
 
     console.log({ message, categoryId });
   }
+
+  async getAll(): Promise<Notification[]> {
+    return await this.notificationRepository.getAll();
+  }
 }

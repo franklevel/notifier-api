@@ -12,4 +12,13 @@ export class NotificationRepository {
   async createNotification(notification: Notification): Promise<Notification> {
     return this.notificationRepository.save(notification);
   }
+
+  async getAll(): Promise<Notification[]> {
+    return this.notificationRepository.find({
+      relations: ['category', 'channel'],
+      order: {
+        createdAt: "DESC",
+      },
+    });
+  }
 }
