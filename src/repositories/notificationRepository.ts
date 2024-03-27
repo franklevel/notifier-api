@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 import { Notification } from "../entities/Notification";
 import { AppDataSource } from "../config/ormconfig";
+import { NotificationRepositoryInterface } from "../interfaces/notificationRepositoryInterface";
 
-export class NotificationRepository {
+export class NotificationRepository implements NotificationRepositoryInterface{
   private notificationRepository: Repository<Notification>;
 
   constructor() {

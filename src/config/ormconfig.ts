@@ -1,3 +1,4 @@
+import { Category } from "../entities/Category";
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
@@ -7,7 +8,7 @@ export const AppDataSource = new DataSource({
   username: 'notifier_user',
   password: 'notifier_pwd',
   database: 'notifier_db',
-  entities: ['src/entities/*.ts'],
+  entities: ['src/entities/*.ts', Category],
   migrations: ['src/database/migrations/*.ts'],
   synchronize: true,
   logging: true,

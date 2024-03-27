@@ -8,8 +8,6 @@ import { ChannelRepositoryInterface } from "../interfaces/channelRepositoryInter
 import { CategoryRepositoryInterface } from "../interfaces/categoryRepositoryInterface";
 import { notificationHandlers } from "./handlers/notificationHandler";
 
-
-
 export class NotificationService implements NotificationServiceInterface {
   constructor(
     private readonly userRepository: UserRepositoryInterface,
@@ -25,28 +23,24 @@ export class NotificationService implements NotificationServiceInterface {
     const category = await this.categoryRepository.findOne(categoryId);
     console.log({ mappedUsers });
     mappedUsers.forEach((user) => {
-      user.notificationChannels.forEach(async (channelName) => {
-        const channel = await this.channelRepository.findByName(channelName);
-        const userFound = await this.userRepository.findOne(user.id);
-        console.log({ channel, userFound });
-        if (!channel || !userFound) {
+      user.notificationChannels.forEach(async (channel) => {
+        console.log({ channel, user });
+        if (!channel || !user) {
           throw new Error("There is not a valid channel or user not found");
         }
-        if (user.notificationChannels.includes(channelName)) {
-          const notification = new Notification(
-            message,
-            category,
-            channel,
-            userFound
-          );
-          const handler = notificationHandlers[channelName];
-          if (handler) {
-            handler(notification, user);
-          } else {
-            console.error("Invalid notification channel");
-          }
-          await this.notificationRepository.createNotification(notification);
+        const notification = new Notification(
+          message,
+          category,
+          channel,
+          user
+        );
+        const handler = notificationHandlers[channel.name];
+        if (handler) {
+          handler(notification, user);
+        } else {
+          console.error("Invalid notification channel");
         }
+        await this.notificationRepository.createNotification(notification);
       });
     });
 

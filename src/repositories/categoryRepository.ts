@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 import { Category } from "../entities/Category";
 import { AppDataSource } from "../config/ormconfig";
+import { CategoryRepositoryInterface } from "../interfaces/categoryRepositoryInterface";
 
-export class CategoryRepository {
+export class CategoryRepository implements CategoryRepositoryInterface{
   private categoryRepository: Repository<Category>;
 
   constructor() {

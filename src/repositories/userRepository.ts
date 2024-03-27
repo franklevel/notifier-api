@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 import { User } from "../entities/User";
 import { AppDataSource } from "../config/ormconfig";
+import { UserRepositoryInterface } from "../interfaces/userRepositoryInterface";
 
-export class UserRepository {
+export class UserRepository implements UserRepositoryInterface{
   private userRepository: Repository<User>;
 
   constructor() {

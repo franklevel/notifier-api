@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 import { Channel } from "../entities/Channel";
 import { AppDataSource } from "../config/ormconfig";
+import { ChannelRepositoryInterface } from "../interfaces/channelRepositoryInterface";
 
-export class ChannelRepository {
+export class ChannelRepository implements ChannelRepositoryInterface{
   private channelRepository: Repository<Channel>;
 
   constructor() {

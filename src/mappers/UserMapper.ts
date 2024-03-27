@@ -9,10 +9,10 @@ export function mapUserToDTO(user: User): UserDTO {
     phoneNumber: user.phoneNumber,
     deviceToken: user.deviceToken,
     subscribedCategories: user.subscribedCategories.map(
-      (category) => category.name
+      (category) => category
     ),
     notificationChannels: user.notificationChannels.map(
-      (channel) => channel.name
+      (channel) => channel
     ),
   };
 
