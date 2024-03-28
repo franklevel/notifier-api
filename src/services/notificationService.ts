@@ -18,7 +18,6 @@ export class NotificationService implements NotificationServiceInterface {
 
   async sendNotification(message: string, categoryId: string): Promise<void> {
     const users = await this.userRepository.findSubscribedUsers(categoryId);
-    console.log({ users });
     const mappedUsers = users?.map((user) => mapUserToDTO(user));
     const category = await this.categoryRepository.findOne(categoryId);
     const notifications: Notification[] = [];
@@ -32,7 +31,7 @@ export class NotificationService implements NotificationServiceInterface {
         notifications.push(notification);
         const handler = notificationHandlers[channel.name];
         if (handler) {
-          handler(notification, user);
+          await handler(notification, user);
         } else {
           console.error("Invalid notification channel");
         }
