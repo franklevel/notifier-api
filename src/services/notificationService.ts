@@ -21,29 +21,28 @@ export class NotificationService implements NotificationServiceInterface {
     console.log({ users });
     const mappedUsers = users?.map((user) => mapUserToDTO(user));
     const category = await this.categoryRepository.findOne(categoryId);
+    const notifications: Notification[] = [];
+
     console.log({ mappedUsers });
+
     mappedUsers.forEach((user) => {
       user.notificationChannels.forEach(async (channel) => {
         console.log({ channel, user });
         if (!channel || !user) {
           throw new Error("There is not a valid channel or user not found");
         }
-        const notification = new Notification(
-          message,
-          category,
-          channel,
-          user
-        );
+        const notification = new Notification(message, category, channel, user);
+        notifications.push(notification);
         const handler = notificationHandlers[channel.name];
         if (handler) {
           handler(notification, user);
         } else {
           console.error("Invalid notification channel");
         }
-        await this.notificationRepository.createNotification(notification);
       });
     });
 
+    await this.notificationRepository.createNotification(notifications);
     console.log({ message, categoryId });
   }
 

@@ -1,6 +1,6 @@
 import { Notification } from "../entities/Notification";
 
 export interface NotificationRepositoryInterface {
-  createNotification(notification: Notification): Promise<Notification>;
+  createNotification(notifications: Notification[]): Promise<Notification[]>;
   getAll(): Promise<Notification[]>;
 }

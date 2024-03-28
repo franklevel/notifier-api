@@ -10,8 +10,8 @@ export class NotificationRepository implements NotificationRepositoryInterface{
     this.notificationRepository = AppDataSource.getRepository(Notification);
   }
 
-  async createNotification(notification: Notification): Promise<Notification> {
-    return this.notificationRepository.save(notification);
+  async createNotification(notifications: Notification[]): Promise<Notification[]> {
+    return this.notificationRepository.save(notifications);
   }
 
   async getAll(): Promise<Notification[]> {

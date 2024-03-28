@@ -1,5 +1,8 @@
+import { User } from "../entities/User";
+import { Notification } from "../entities/Notification";
+
 export class SMSNotification {
-  send(message: string, recipient: string): void {
-    console.log(`Sending SMS to ${recipient}: ${message}`);
+  async send(notification: Notification, user: User): Promise<void> {
+    console.log(`Sending SMS to ${user.email}: ${notification.message}`);
   }
 }

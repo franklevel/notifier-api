@@ -6,22 +6,19 @@ import { User } from "../../entities/User";
 import { Notification } from "../../entities/Notification";
 
 export const notificationHandlers = {
-  [NotificationChannel.SMS]: async (notification: Notification, user: User) => {
+  [NotificationChannel.SMS]: (notification: Notification, user: User) => {
     const smsNotification = new SMSNotification();
-    smsNotification.send(notification.message, user.phoneNumber);
+    smsNotification.send(notification, user);
   },
-  [NotificationChannel.Email]: async (
-    notification: Notification,
-    user: User
-  ) => {
+  [NotificationChannel.Email]: (notification: Notification, user: User) => {
     const emailNotification = new EmailNotification();
-    emailNotification.send(notification.message, user.email);
+    emailNotification.send(notification, user);
   },
-  [NotificationChannel.PushNotification]: async (
+  [NotificationChannel.PushNotification]: (
     notification: Notification,
     user: User
   ) => {
     const pushNotification = new PushNotification();
-    pushNotification.send(notification.message, user.deviceToken);
+    pushNotification.send(notification, user);
   },
 };
