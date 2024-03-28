@@ -23,11 +23,8 @@ export class NotificationService implements NotificationServiceInterface {
     const category = await this.categoryRepository.findOne(categoryId);
     const notifications: Notification[] = [];
 
-    console.log({ mappedUsers });
-
     mappedUsers.forEach((user) => {
       user.notificationChannels.forEach(async (channel) => {
-        console.log({ channel, user });
         if (!channel || !user) {
           throw new Error("There is not a valid channel or user not found");
         }
@@ -43,7 +40,6 @@ export class NotificationService implements NotificationServiceInterface {
     });
 
     await this.notificationRepository.createNotification(notifications);
-    console.log({ message, categoryId });
   }
 
   async getAll(): Promise<Notification[]> {

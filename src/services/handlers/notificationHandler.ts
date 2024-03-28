@@ -5,7 +5,11 @@ import { PushNotification } from "../../services/pushNotificationService";
 import { User } from "../../entities/User";
 import { Notification } from "../../entities/Notification";
 
-export const notificationHandlers = {
+type NotificationHandlerTypes = {
+  [key in NotificationChannel]: (notification: Notification, user: User) => void;
+}
+
+export const notificationHandlers: NotificationHandlerTypes = {
   [NotificationChannel.SMS]: (notification: Notification, user: User) => {
     const smsNotification = new SMSNotification();
     smsNotification.send(notification, user);
