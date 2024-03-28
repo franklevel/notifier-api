@@ -2,20 +2,17 @@ import { Request, Response } from "express";
 import { NotificationService } from "../services/notificationService";
 import { UserRepository } from "../repositories/userRepository";
 import { NotificationRepository } from "../repositories/notificationRepository";
-import { ChannelRepository } from "../repositories/channelRepository";
 import { CategoryRepository } from "../repositories/categoryRepository";
 import { Notification } from "../entities/Notification";
 
 const userRepository = new UserRepository();
 const notificationRepository = new NotificationRepository();
-const channelRepository = new ChannelRepository();
 const categoryRepository = new CategoryRepository();
 
 const notificationService = new NotificationService(
   userRepository,
   notificationRepository,
   categoryRepository,
-  channelRepository
 );
 
 export const sendNotification = async (

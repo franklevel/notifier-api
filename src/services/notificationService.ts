@@ -4,7 +4,6 @@ import { NotificationServiceInterface } from "../interfaces/notificationServiceI
 import { NotificationRepositoryInterface } from "../interfaces/notificationRepositoryInterface";
 import { mapUserToDTO } from "../mappers/UserMapper";
 import { Notification } from "../entities/Notification";
-import { ChannelRepositoryInterface } from "../interfaces/channelRepositoryInterface";
 import { CategoryRepositoryInterface } from "../interfaces/categoryRepositoryInterface";
 import { notificationHandlers } from "./handlers/notificationHandler";
 
@@ -13,7 +12,6 @@ export class NotificationService implements NotificationServiceInterface {
     private readonly userRepository: UserRepositoryInterface,
     private readonly notificationRepository: NotificationRepositoryInterface,
     private readonly categoryRepository: CategoryRepositoryInterface,
-    private readonly channelRepository: ChannelRepositoryInterface
   ) {}
 
   async sendNotification(message: string, categoryId: string): Promise<void> {
@@ -31,7 +29,7 @@ export class NotificationService implements NotificationServiceInterface {
         notifications.push(notification);
         const handler = notificationHandlers[channel.name];
         if (handler) {
-          await handler(notification, user);
+          handler(notification, user);
         } else {
           console.error("Invalid notification channel");
         }
